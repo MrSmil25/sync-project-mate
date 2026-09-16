@@ -175,8 +175,8 @@ export function AcademicJourney({ onBack, onOpenCourse, setup = null }: { onBack
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-display text-lg font-bold text-academic">S{entry.semester}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${entry.phase === "completed" ? "bg-success/12 text-success" : entry.phase === "current" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-                      {entry.phase === "completed" ? "Completed" : entry.phase === "current" ? "You are here" : "Upcoming"}
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${entry.phase === "completed" ? "bg-success/12 text-success" : entry.phase === "current" ? "bg-primary text-primary-foreground" : entry.phase === "past" ? "bg-accent text-academic" : "bg-muted text-muted-foreground"}`}>
+                      {entry.phase === "completed" ? "Completed" : entry.phase === "current" ? "You are here" : entry.phase === "past" ? "Partly completed" : "Upcoming"}
                     </span>
                   </div>
                   <p className="mt-1 text-[11px] text-muted-foreground">{entry.year}</p>
