@@ -91,7 +91,7 @@ export function AcademicJourney({ onBack, onOpenCourse, setup = null }: { onBack
     [statuses, currentSemester, entryYear],
   );
 
-  const detail = timeline.find((entry) => entry.semester === openSemester) ?? timeline[0];
+  const detail = timeline.find((entry) => entry.semester === openSemester) ?? timeline[0]!;
   const recommended = useMemo(() => recommendNextSemester(setup, statuses), [setup, statuses]);
   const customSks = custom.reduce((sum, item) => sum + item.sks, 0);
   const unlocks = selected ? curriculum.filter((course) => course.prereq.includes(selected.code)) : [];
