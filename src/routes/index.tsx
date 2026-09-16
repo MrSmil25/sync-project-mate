@@ -291,7 +291,7 @@ function AcademicApp() {
     <div className="min-h-screen bg-background pb-24 text-foreground md:pb-8">
       <DesktopHeader view={view} navigate={navigate} onSearch={() => setSearchOpen(true)} onNotifications={() => setNotifOpen(true)} notificationCount={notifications.length} />
       <main className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 md:py-8">
-        {exam ? <StudyCommandCenter event={exam} onBack={() => setExam(null)} sessions={studySessions} onAddSession={addStudySession} onRemoveSession={removeStudySession} /> : workspace ? <CourseWorkspace course={workspace} onBack={() => setWorkspace(null)} onOpenExam={openExamForCourse} links={semesterData.links.filter((link) => link.code === workspace.code)} onAddLink={semesterData.addLink} onRemoveLink={semesterData.removeLink} sessions={semesterData.sessions.filter((session) => session.code === workspace.code)} onAddSession={semesterData.addSession} onRemoveSession={semesterData.removeSession} /> : journey ? <AcademicJourney onBack={() => setJourney(false)} onOpenCourse={openCurriculumCourse} /> : (
+        {exam ? <StudyCommandCenter event={exam} onBack={() => setExam(null)} sessions={studySessions} onAddSession={addStudySession} onRemoveSession={removeStudySession} /> : workspace ? <CourseWorkspace course={workspace} onBack={() => setWorkspace(null)} onOpenExam={openExamForCourse} links={semesterData.links.filter((link) => link.code === workspace.code)} onAddLink={semesterData.addLink} onRemoveLink={semesterData.removeLink} sessions={semesterData.sessions.filter((session) => session.code === workspace.code)} onAddSession={semesterData.addSession} onRemoveSession={semesterData.removeSession} /> : journey ? <AcademicJourney onBack={() => setJourney(false)} onOpenCourse={openCurriculumCourse} setup={setup} /> : (
           <div key={view} className="page-enter">
             {view === "home" && <HomeView tasks={tasks} toggleTask={toggleTask} navigate={navigate} onOpenExam={setExam} onOpenJourney={() => { setJourney(true); window.scrollTo({ top: 0, behavior: "smooth" }); }} onSearch={() => setSearchOpen(true)} onNotifications={() => setNotifOpen(true)} notificationCount={notifications.length} studySessions={studySessions.length} resourcesAdded={resourcesAdded + notesAdded} profile={setup} myCourses={myCourses} onEditSetup={resetSetup} semesterData={semesterData} />}
             {view === "courses" && <CoursesView onOpen={setWorkspace} courses={myCourses} semesterLabel={setup ? `Semester ${setup.currentSemester}` : "Semester Gasal 2026/2027"} />}
@@ -400,7 +400,7 @@ function HomeView({ tasks, toggleTask, navigate, onOpenExam, onOpenJourney, onSe
 
       <SemesterTimeline />
 
-      <JourneyCard onOpen={onOpenJourney} />
+      <JourneyCard onOpen={onOpenJourney} setup={profile ?? null} />
 
       <AcademicEventCard onPrepare={onOpenExam} />
 
