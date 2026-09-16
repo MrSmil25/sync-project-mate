@@ -84,8 +84,14 @@ export function AcademicJourney({ onBack, onOpenCourse, setup = null }: { onBack
         const active = items.filter((course) => statuses.get(course.code) === "current");
         const sks = items.reduce((sum, course) => sum + course.sks, 0);
         const percent = items.length ? Math.round((done.length / items.length) * 100) : 0;
-        const phase: "completed" | "current" | "upcoming" =
-          semester < currentSemester || (items.length > 0 && done.length === items.length) ? "completed" : semester === currentSemester ? "current" : "upcoming";
+        const phase: "completed" | "current" | "past" | "upcoming" =
+          items.length > 0 && done.length === items.length
+            ? "completed"
+            : semester === currentSemester
+              ? "current"
+              : semester < currentSemester
+                ? "past"
+                : "upcoming";
         return { semester, items, done: done.length, active: active.length, sks, percent, phase, year: academicYearLabel(entryYear, semester) };
       }),
     [statuses, currentSemester, entryYear],
